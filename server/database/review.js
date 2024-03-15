@@ -1,7 +1,5 @@
 /* eslint-env node */
 /* eslint-disable no-console */
-
-// Add the following line at the top to specify the ECMAScript version
 /* eslint-disable esversion: 6 */
 
 const mongoose = require('mongoose');

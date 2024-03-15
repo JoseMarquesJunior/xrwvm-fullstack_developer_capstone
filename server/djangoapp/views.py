@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
@@ -38,7 +39,7 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    email_exist = False
+    # email_exist = False
     try:
         User.objects.get(username=username)
         username_exist = True
@@ -98,7 +99,7 @@ def add_review(request):
         try:
             post_review(data)
             return JsonResponse({"status": 200})
-        except:
+        except requests.exceptions.RequestException as e:
             return JsonResponse({"status": 401, "message": "Error in posting review"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})

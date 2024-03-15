@@ -1,3 +1,4 @@
+import requests
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -100,6 +101,6 @@ def add_review(request):
             post_review(data)
             return JsonResponse({"status": 200})
         except requests.exceptions.RequestException as e:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse({"status": 401, "message": f"Error in posting review: {e}"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
